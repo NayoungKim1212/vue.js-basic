@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+<script>
+
+	window.onload = function(){
+		var test1 = new Vue({
+			el : '#test1',
+            data: function () {
+                return {
+                    msg: "첫번째 메시지입니다."
+                }
+            },
+			components:{
+				'component1':{
+					props:['firstMsg'],
+					template : '<div>{{firstMsg}}<button type="button" @click="clickButton">emit</button></div>',
+					methods: {
+						clickButton: function() {
+							this.$emit("clicked", "버튼을 클릭하였습니다."); <!----$ : 객체라고 생각----->
+						}
+					}
+				}
+			
+			},
+			methods: {
+				callEmit: function(msg){
+					alert(msg);
+				}
+			}
+        
+		})
+
+	}
+</script>
+</head>
+<body>
+	<div id="test1">
+		<component1 :first-msg='msg' @clicked="callEmit"></component1> <!----first-msg='msg'를 firstmsg='msg'로 수정하면 값을 받아오지 못함-->
+	</div>
+	
+</body>
+</html>
+
+
+
+
+
+
